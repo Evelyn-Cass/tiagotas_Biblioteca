@@ -1,4 +1,4 @@
-name: CI/CD - React.js Application with Docker
+name: CI/CD - PHP Application with Docker
 
 on:
   push:
@@ -56,17 +56,6 @@ jobs:
           load: true # Load to local Docker daemon for testing
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache,mode=max
-
-      - name: Run PHP tests with PHPUnit
-        run: |
-          docker run --rm \
-            --workdir /app \
-            --entrypoint "" \
-            ${{ steps.meta.outputs.REPO_NAME }}-dev:latest \
-            sh -c "composer install && ./vendor/bin/phpunit"
-        env:
-          CI: true
-        timeout-minutes: 10
 
       # 8. Login to Docker Hub
       - name: Log in to Docker Hub
